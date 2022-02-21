@@ -1,0 +1,666 @@
+
+GccApplication7.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000003ae  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000035a  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000003ae  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003e0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000070  00000000  00000000  0000041c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000a77  00000000  00000000  0000048c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000712  00000000  00000000  00000f03  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000059f  00000000  00000000  00001615  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000118  00000000  00000000  00001bb4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000042c  00000000  00000000  00001ccc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000416  00000000  00000000  000020f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000060  00000000  00000000  0000250e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 87 01 	jmp	0x30e	; 0x30e <__vector_1>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 6f 01 	call	0x2de	; 0x2de <main>
+  78:	0c 94 ab 01 	jmp	0x356	; 0x356 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <IniLeds>:
+#include <util/delay.h>
+#include <avr/interrupt.h>
+
+void IniLeds(void)
+{ //leds as output
+  DDRB |= (1<<DDB1) | (1<<DDB2)| (1<<DDB3); 
+  80:	84 b1       	in	r24, 0x04	; 4
+  82:	8e 60       	ori	r24, 0x0E	; 14
+  84:	84 b9       	out	0x04, r24	; 4
+  86:	08 95       	ret
+
+00000088 <Lightdarktobright>:
+}
+
+void Lightdarktobright(void)
+{
+  
+  for(int i = 0; i < 255; i++)
+  88:	20 e0       	ldi	r18, 0x00	; 0
+  8a:	30 e0       	ldi	r19, 0x00	; 0
+  8c:	12 c0       	rjmp	.+36     	; 0xb2 <Lightdarktobright+0x2a>
+  {
+    OCR1A += 1;
+  8e:	e8 e8       	ldi	r30, 0x88	; 136
+  90:	f0 e0       	ldi	r31, 0x00	; 0
+  92:	80 81       	ld	r24, Z
+  94:	91 81       	ldd	r25, Z+1	; 0x01
+  96:	01 96       	adiw	r24, 0x01	; 1
+  98:	91 83       	std	Z+1, r25	; 0x01
+  9a:	80 83       	st	Z, r24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  9c:	4f ef       	ldi	r20, 0xFF	; 255
+  9e:	86 e7       	ldi	r24, 0x76	; 118
+  a0:	91 e0       	ldi	r25, 0x01	; 1
+  a2:	41 50       	subi	r20, 0x01	; 1
+  a4:	80 40       	sbci	r24, 0x00	; 0
+  a6:	90 40       	sbci	r25, 0x00	; 0
+  a8:	e1 f7       	brne	.-8      	; 0xa2 <Lightdarktobright+0x1a>
+  aa:	00 c0       	rjmp	.+0      	; 0xac <Lightdarktobright+0x24>
+  ac:	00 00       	nop
+}
+
+void Lightdarktobright(void)
+{
+  
+  for(int i = 0; i < 255; i++)
+  ae:	2f 5f       	subi	r18, 0xFF	; 255
+  b0:	3f 4f       	sbci	r19, 0xFF	; 255
+  b2:	2f 3f       	cpi	r18, 0xFF	; 255
+  b4:	31 05       	cpc	r19, r1
+  b6:	5c f3       	brlt	.-42     	; 0x8e <Lightdarktobright+0x6>
+  {
+    OCR1A += 1;
+    _delay_ms(30);
+  }
+  OCR1A = 0;
+  b8:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+  bc:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+  PORTB &= ~(1<<PORTB1);
+  c0:	85 b1       	in	r24, 0x05	; 5
+  c2:	8d 7f       	andi	r24, 0xFD	; 253
+  c4:	85 b9       	out	0x05, r24	; 5
+  
+  
+  for(int i = 0; i < 255; i++)
+  c6:	20 e0       	ldi	r18, 0x00	; 0
+  c8:	30 e0       	ldi	r19, 0x00	; 0
+  ca:	12 c0       	rjmp	.+36     	; 0xf0 <Lightdarktobright+0x68>
+  {
+    OCR1B += 1;
+  cc:	ea e8       	ldi	r30, 0x8A	; 138
+  ce:	f0 e0       	ldi	r31, 0x00	; 0
+  d0:	80 81       	ld	r24, Z
+  d2:	91 81       	ldd	r25, Z+1	; 0x01
+  d4:	01 96       	adiw	r24, 0x01	; 1
+  d6:	91 83       	std	Z+1, r25	; 0x01
+  d8:	80 83       	st	Z, r24
+  da:	4f ef       	ldi	r20, 0xFF	; 255
+  dc:	86 e7       	ldi	r24, 0x76	; 118
+  de:	91 e0       	ldi	r25, 0x01	; 1
+  e0:	41 50       	subi	r20, 0x01	; 1
+  e2:	80 40       	sbci	r24, 0x00	; 0
+  e4:	90 40       	sbci	r25, 0x00	; 0
+  e6:	e1 f7       	brne	.-8      	; 0xe0 <Lightdarktobright+0x58>
+  e8:	00 c0       	rjmp	.+0      	; 0xea <Lightdarktobright+0x62>
+  ea:	00 00       	nop
+  }
+  OCR1A = 0;
+  PORTB &= ~(1<<PORTB1);
+  
+  
+  for(int i = 0; i < 255; i++)
+  ec:	2f 5f       	subi	r18, 0xFF	; 255
+  ee:	3f 4f       	sbci	r19, 0xFF	; 255
+  f0:	2f 3f       	cpi	r18, 0xFF	; 255
+  f2:	31 05       	cpc	r19, r1
+  f4:	5c f3       	brlt	.-42     	; 0xcc <Lightdarktobright+0x44>
+  {
+    OCR1B += 1;
+    _delay_ms(30);
+  }
+  OCR1B = 0;
+  f6:	10 92 8b 00 	sts	0x008B, r1	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+  fa:	10 92 8a 00 	sts	0x008A, r1	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+  PORTB &= ~(1<<PORTB2);
+  fe:	85 b1       	in	r24, 0x05	; 5
+ 100:	8b 7f       	andi	r24, 0xFB	; 251
+ 102:	85 b9       	out	0x05, r24	; 5
+  
+  
+  for(int i = 0; i < 255; i++)
+ 104:	20 e0       	ldi	r18, 0x00	; 0
+ 106:	30 e0       	ldi	r19, 0x00	; 0
+ 108:	10 c0       	rjmp	.+32     	; 0x12a <Lightdarktobright+0xa2>
+  {
+    OCR2A += 1;
+ 10a:	e3 eb       	ldi	r30, 0xB3	; 179
+ 10c:	f0 e0       	ldi	r31, 0x00	; 0
+ 10e:	80 81       	ld	r24, Z
+ 110:	8f 5f       	subi	r24, 0xFF	; 255
+ 112:	80 83       	st	Z, r24
+ 114:	4f ef       	ldi	r20, 0xFF	; 255
+ 116:	86 e7       	ldi	r24, 0x76	; 118
+ 118:	91 e0       	ldi	r25, 0x01	; 1
+ 11a:	41 50       	subi	r20, 0x01	; 1
+ 11c:	80 40       	sbci	r24, 0x00	; 0
+ 11e:	90 40       	sbci	r25, 0x00	; 0
+ 120:	e1 f7       	brne	.-8      	; 0x11a <Lightdarktobright+0x92>
+ 122:	00 c0       	rjmp	.+0      	; 0x124 <Lightdarktobright+0x9c>
+ 124:	00 00       	nop
+  }
+  OCR1B = 0;
+  PORTB &= ~(1<<PORTB2);
+  
+  
+  for(int i = 0; i < 255; i++)
+ 126:	2f 5f       	subi	r18, 0xFF	; 255
+ 128:	3f 4f       	sbci	r19, 0xFF	; 255
+ 12a:	2f 3f       	cpi	r18, 0xFF	; 255
+ 12c:	31 05       	cpc	r19, r1
+ 12e:	6c f3       	brlt	.-38     	; 0x10a <Lightdarktobright+0x82>
+  {
+    OCR2A += 1;
+    _delay_ms(30);
+  }
+  OCR2A = 0;
+ 130:	10 92 b3 00 	sts	0x00B3, r1	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+  PORTB &= ~(1<<PORTB3);
+ 134:	85 b1       	in	r24, 0x05	; 5
+ 136:	87 7f       	andi	r24, 0xF7	; 247
+ 138:	85 b9       	out	0x05, r24	; 5
+ 13a:	08 95       	ret
+
+0000013c <lightbrighttodark>:
+
+
+void lightbrighttodark(void)
+{
+	
+  for(int i = 0; i < 255; i++)
+ 13c:	20 e0       	ldi	r18, 0x00	; 0
+ 13e:	30 e0       	ldi	r19, 0x00	; 0
+ 140:	10 c0       	rjmp	.+32     	; 0x162 <lightbrighttodark+0x26>
+  {
+    OCR2A += 1;
+ 142:	e3 eb       	ldi	r30, 0xB3	; 179
+ 144:	f0 e0       	ldi	r31, 0x00	; 0
+ 146:	80 81       	ld	r24, Z
+ 148:	8f 5f       	subi	r24, 0xFF	; 255
+ 14a:	80 83       	st	Z, r24
+ 14c:	4f ef       	ldi	r20, 0xFF	; 255
+ 14e:	86 e7       	ldi	r24, 0x76	; 118
+ 150:	91 e0       	ldi	r25, 0x01	; 1
+ 152:	41 50       	subi	r20, 0x01	; 1
+ 154:	80 40       	sbci	r24, 0x00	; 0
+ 156:	90 40       	sbci	r25, 0x00	; 0
+ 158:	e1 f7       	brne	.-8      	; 0x152 <lightbrighttodark+0x16>
+ 15a:	00 c0       	rjmp	.+0      	; 0x15c <lightbrighttodark+0x20>
+ 15c:	00 00       	nop
+
+
+void lightbrighttodark(void)
+{
+	
+  for(int i = 0; i < 255; i++)
+ 15e:	2f 5f       	subi	r18, 0xFF	; 255
+ 160:	3f 4f       	sbci	r19, 0xFF	; 255
+ 162:	2f 3f       	cpi	r18, 0xFF	; 255
+ 164:	31 05       	cpc	r19, r1
+ 166:	6c f3       	brlt	.-38     	; 0x142 <lightbrighttodark+0x6>
+  {
+    OCR2A += 1;
+    _delay_ms(30);
+  }
+  OCR2A = 0;
+ 168:	10 92 b3 00 	sts	0x00B3, r1	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+  PORTB &= ~(1<<PORTB3);
+ 16c:	85 b1       	in	r24, 0x05	; 5
+ 16e:	87 7f       	andi	r24, 0xF7	; 247
+ 170:	85 b9       	out	0x05, r24	; 5
+  
+  
+  for(int i = 0; i < 255; i++)
+ 172:	20 e0       	ldi	r18, 0x00	; 0
+ 174:	30 e0       	ldi	r19, 0x00	; 0
+ 176:	12 c0       	rjmp	.+36     	; 0x19c <lightbrighttodark+0x60>
+  {
+    OCR1B += 1;
+ 178:	ea e8       	ldi	r30, 0x8A	; 138
+ 17a:	f0 e0       	ldi	r31, 0x00	; 0
+ 17c:	80 81       	ld	r24, Z
+ 17e:	91 81       	ldd	r25, Z+1	; 0x01
+ 180:	01 96       	adiw	r24, 0x01	; 1
+ 182:	91 83       	std	Z+1, r25	; 0x01
+ 184:	80 83       	st	Z, r24
+ 186:	4f ef       	ldi	r20, 0xFF	; 255
+ 188:	86 e7       	ldi	r24, 0x76	; 118
+ 18a:	91 e0       	ldi	r25, 0x01	; 1
+ 18c:	41 50       	subi	r20, 0x01	; 1
+ 18e:	80 40       	sbci	r24, 0x00	; 0
+ 190:	90 40       	sbci	r25, 0x00	; 0
+ 192:	e1 f7       	brne	.-8      	; 0x18c <lightbrighttodark+0x50>
+ 194:	00 c0       	rjmp	.+0      	; 0x196 <lightbrighttodark+0x5a>
+ 196:	00 00       	nop
+  }
+  OCR2A = 0;
+  PORTB &= ~(1<<PORTB3);
+  
+  
+  for(int i = 0; i < 255; i++)
+ 198:	2f 5f       	subi	r18, 0xFF	; 255
+ 19a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 19c:	2f 3f       	cpi	r18, 0xFF	; 255
+ 19e:	31 05       	cpc	r19, r1
+ 1a0:	5c f3       	brlt	.-42     	; 0x178 <lightbrighttodark+0x3c>
+  {
+    OCR1B += 1;
+    _delay_ms(30);
+  }
+  OCR1B = 0;
+ 1a2:	10 92 8b 00 	sts	0x008B, r1	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ 1a6:	10 92 8a 00 	sts	0x008A, r1	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+  PORTB &= ~(1<<PORTB2);
+ 1aa:	85 b1       	in	r24, 0x05	; 5
+ 1ac:	8b 7f       	andi	r24, 0xFB	; 251
+ 1ae:	85 b9       	out	0x05, r24	; 5
+      
+  for(int i = 0; i < 255; i++)
+ 1b0:	20 e0       	ldi	r18, 0x00	; 0
+ 1b2:	30 e0       	ldi	r19, 0x00	; 0
+ 1b4:	12 c0       	rjmp	.+36     	; 0x1da <lightbrighttodark+0x9e>
+  {
+    OCR1A += 1;
+ 1b6:	e8 e8       	ldi	r30, 0x88	; 136
+ 1b8:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ba:	80 81       	ld	r24, Z
+ 1bc:	91 81       	ldd	r25, Z+1	; 0x01
+ 1be:	01 96       	adiw	r24, 0x01	; 1
+ 1c0:	91 83       	std	Z+1, r25	; 0x01
+ 1c2:	80 83       	st	Z, r24
+ 1c4:	4f ef       	ldi	r20, 0xFF	; 255
+ 1c6:	86 e7       	ldi	r24, 0x76	; 118
+ 1c8:	91 e0       	ldi	r25, 0x01	; 1
+ 1ca:	41 50       	subi	r20, 0x01	; 1
+ 1cc:	80 40       	sbci	r24, 0x00	; 0
+ 1ce:	90 40       	sbci	r25, 0x00	; 0
+ 1d0:	e1 f7       	brne	.-8      	; 0x1ca <lightbrighttodark+0x8e>
+ 1d2:	00 c0       	rjmp	.+0      	; 0x1d4 <lightbrighttodark+0x98>
+ 1d4:	00 00       	nop
+    _delay_ms(30);
+  }
+  OCR1B = 0;
+  PORTB &= ~(1<<PORTB2);
+      
+  for(int i = 0; i < 255; i++)
+ 1d6:	2f 5f       	subi	r18, 0xFF	; 255
+ 1d8:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1da:	2f 3f       	cpi	r18, 0xFF	; 255
+ 1dc:	31 05       	cpc	r19, r1
+ 1de:	5c f3       	brlt	.-42     	; 0x1b6 <lightbrighttodark+0x7a>
+  {
+    OCR1A += 1;
+    _delay_ms(30);
+  }
+  OCR1A = 0;
+ 1e0:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 1e4:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+  PORTB &= ~(1<<PORTB1);
+ 1e8:	85 b1       	in	r24, 0x05	; 5
+ 1ea:	8d 7f       	andi	r24, 0xFD	; 253
+ 1ec:	85 b9       	out	0x05, r24	; 5
+ 1ee:	08 95       	ret
+
+000001f0 <InitButton>:
+//BUTTON
+
+void InitButton(void)
+{
+  //digital button 2 as input
+  DDRD &= (1 << DDD2);
+ 1f0:	8a b1       	in	r24, 0x0a	; 10
+ 1f2:	84 70       	andi	r24, 0x04	; 4
+ 1f4:	8a b9       	out	0x0a, r24	; 10
+  PORTD |= ( 1 << PORTD2);
+ 1f6:	8b b1       	in	r24, 0x0b	; 11
+ 1f8:	84 60       	ori	r24, 0x04	; 4
+ 1fa:	8b b9       	out	0x0b, r24	; 11
+ 1fc:	08 95       	ret
+
+000001fe <InitPotentiometer>:
+
+//POTENTIOMETER
+void InitPotentiometer(void)
+{
+  // potentiometer at Analog 1
+  ADMUX |= ( 1 << REFS0);
+ 1fe:	ec e7       	ldi	r30, 0x7C	; 124
+ 200:	f0 e0       	ldi	r31, 0x00	; 0
+ 202:	80 81       	ld	r24, Z
+ 204:	80 64       	ori	r24, 0x40	; 64
+ 206:	80 83       	st	Z, r24
+  ADCSRA |= ( 1 << ADEN) | (1 << ADPS0) | ( 1 << ADPS1);
+ 208:	ea e7       	ldi	r30, 0x7A	; 122
+ 20a:	f0 e0       	ldi	r31, 0x00	; 0
+ 20c:	80 81       	ld	r24, Z
+ 20e:	83 68       	ori	r24, 0x83	; 131
+ 210:	80 83       	st	Z, r24
+ 212:	08 95       	ret
+
+00000214 <FastPwm>:
+
+
+void FastPwm(void)
+{
+  // PIN9
+  TCCR1A |= (1 << WGM10) | (1 << COM1A1);
+ 214:	a0 e8       	ldi	r26, 0x80	; 128
+ 216:	b0 e0       	ldi	r27, 0x00	; 0
+ 218:	8c 91       	ld	r24, X
+ 21a:	81 68       	ori	r24, 0x81	; 129
+ 21c:	8c 93       	st	X, r24
+  TCCR1B |= (1 << CS10) | (1 << WGM12);
+ 21e:	e1 e8       	ldi	r30, 0x81	; 129
+ 220:	f0 e0       	ldi	r31, 0x00	; 0
+ 222:	80 81       	ld	r24, Z
+ 224:	89 60       	ori	r24, 0x09	; 9
+ 226:	80 83       	st	Z, r24
+
+  // PIN10
+  TCCR1A |= (1<<COM1B1)| (1<<WGM10);      
+ 228:	8c 91       	ld	r24, X
+ 22a:	81 62       	ori	r24, 0x21	; 33
+ 22c:	8c 93       	st	X, r24
+  TCCR1B |= (1<<WGM12)|(1<<CS10);       
+ 22e:	80 81       	ld	r24, Z
+ 230:	89 60       	ori	r24, 0x09	; 9
+ 232:	80 83       	st	Z, r24
+  
+  // PIN11
+  TCCR2A |=  (1 << COM2A1) | (1<<WGM20) ;   // Normal mode OC2A & OC2B
+ 234:	e0 eb       	ldi	r30, 0xB0	; 176
+ 236:	f0 e0       	ldi	r31, 0x00	; 0
+ 238:	80 81       	ld	r24, Z
+ 23a:	81 68       	ori	r24, 0x81	; 129
+ 23c:	80 83       	st	Z, r24
+  TCCR2B |=  (1 << CS22) | (1 << CS20); //setting bits
+ 23e:	e1 eb       	ldi	r30, 0xB1	; 177
+ 240:	f0 e0       	ldi	r31, 0x00	; 0
+ 242:	80 81       	ld	r24, Z
+ 244:	85 60       	ori	r24, 0x05	; 5
+ 246:	80 83       	st	Z, r24
+ 248:	08 95       	ret
+
+0000024a <ConversionADC>:
+}
+
+
+uint16_t ConversionADC(void)
+{
+  ADCSRA |= (1<<ADSC);
+ 24a:	ea e7       	ldi	r30, 0x7A	; 122
+ 24c:	f0 e0       	ldi	r31, 0x00	; 0
+ 24e:	80 81       	ld	r24, Z
+ 250:	80 64       	ori	r24, 0x40	; 64
+ 252:	80 83       	st	Z, r24
+  loop_until_bit_is_clear(ADCSRA, ADSC);
+ 254:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+ 258:	86 fd       	sbrc	r24, 6
+ 25a:	fc cf       	rjmp	.-8      	; 0x254 <ConversionADC+0xa>
+  uint16_t pt = ADC;
+ 25c:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+ 260:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+  return pt;
+}
+ 264:	08 95       	ret
+
+00000266 <Blinkleds>:
+
+void Blinkleds(void)
+{
+ 266:	cf 93       	push	r28
+ 268:	df 93       	push	r29
+  
+  OCR1A = 0;
+ 26a:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 26e:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+  OCR1B = 0;
+ 272:	10 92 8b 00 	sts	0x008B, r1	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ 276:	10 92 8a 00 	sts	0x008A, r1	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+  OCR2A =0;
+ 27a:	10 92 b3 00 	sts	0x00B3, r1	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+  
+  // Blinking Twice
+  for (int i = 0; i < 2; i++)
+ 27e:	80 e0       	ldi	r24, 0x00	; 0
+ 280:	90 e0       	ldi	r25, 0x00	; 0
+ 282:	1e c0       	rjmp	.+60     	; 0x2c0 <Blinkleds+0x5a>
+  {
+     OCR1A = 0xFF;
+ 284:	c8 e8       	ldi	r28, 0x88	; 136
+ 286:	d0 e0       	ldi	r29, 0x00	; 0
+ 288:	2f ef       	ldi	r18, 0xFF	; 255
+ 28a:	30 e0       	ldi	r19, 0x00	; 0
+ 28c:	39 83       	std	Y+1, r19	; 0x01
+ 28e:	28 83       	st	Y, r18
+     OCR1B = 0xFF;
+ 290:	aa e8       	ldi	r26, 0x8A	; 138
+ 292:	b0 e0       	ldi	r27, 0x00	; 0
+ 294:	11 96       	adiw	r26, 0x01	; 1
+ 296:	3c 93       	st	X, r19
+ 298:	2e 93       	st	-X, r18
+     OCR2A = 0xFF;
+ 29a:	e3 eb       	ldi	r30, 0xB3	; 179
+ 29c:	f0 e0       	ldi	r31, 0x00	; 0
+ 29e:	2f ef       	ldi	r18, 0xFF	; 255
+ 2a0:	20 83       	st	Z, r18
+ 2a2:	2f ef       	ldi	r18, 0xFF	; 255
+ 2a4:	39 e6       	ldi	r19, 0x69	; 105
+ 2a6:	48 e1       	ldi	r20, 0x18	; 24
+ 2a8:	21 50       	subi	r18, 0x01	; 1
+ 2aa:	30 40       	sbci	r19, 0x00	; 0
+ 2ac:	40 40       	sbci	r20, 0x00	; 0
+ 2ae:	e1 f7       	brne	.-8      	; 0x2a8 <Blinkleds+0x42>
+ 2b0:	00 c0       	rjmp	.+0      	; 0x2b2 <Blinkleds+0x4c>
+ 2b2:	00 00       	nop
+    _delay_ms(500);
+	OCR1A == 0x00;
+ 2b4:	28 81       	ld	r18, Y
+ 2b6:	39 81       	ldd	r19, Y+1	; 0x01
+     OCR1B == 0x00;
+ 2b8:	2d 91       	ld	r18, X+
+ 2ba:	3c 91       	ld	r19, X
+     OCR2A == 0x00;
+ 2bc:	20 81       	ld	r18, Z
+  OCR1A = 0;
+  OCR1B = 0;
+  OCR2A =0;
+  
+  // Blinking Twice
+  for (int i = 0; i < 2; i++)
+ 2be:	01 96       	adiw	r24, 0x01	; 1
+ 2c0:	82 30       	cpi	r24, 0x02	; 2
+ 2c2:	91 05       	cpc	r25, r1
+ 2c4:	fc f2       	brlt	.-66     	; 0x284 <Blinkleds+0x1e>
+    _delay_ms(500);
+	OCR1A == 0x00;
+     OCR1B == 0x00;
+     OCR2A == 0x00;
+  }
+}
+ 2c6:	df 91       	pop	r29
+ 2c8:	cf 91       	pop	r28
+ 2ca:	08 95       	ret
+
+000002cc <TInterrupt>:
+
+void TInterrupt(void)
+{
+  EICRA |= (1 << ISC00);  
+ 2cc:	e9 e6       	ldi	r30, 0x69	; 105
+ 2ce:	f0 e0       	ldi	r31, 0x00	; 0
+ 2d0:	80 81       	ld	r24, Z
+ 2d2:	81 60       	ori	r24, 0x01	; 1
+ 2d4:	80 83       	st	Z, r24
+  EIMSK |= (1 << INT0);  
+ 2d6:	8d b3       	in	r24, 0x1d	; 29
+ 2d8:	81 60       	ori	r24, 0x01	; 1
+ 2da:	8d bb       	out	0x1d, r24	; 29
+ 2dc:	08 95       	ret
+
+000002de <main>:
+
+
+int main()
+{
+  // Button initialization
+  InitButton();
+ 2de:	0e 94 f8 00 	call	0x1f0	; 0x1f0 <InitButton>
+  IniLeds();
+ 2e2:	0e 94 40 00 	call	0x80	; 0x80 <IniLeds>
+  //blinking sequentially
+
+		
+	
+  InitPotentiometer();
+ 2e6:	0e 94 ff 00 	call	0x1fe	; 0x1fe <InitPotentiometer>
+  
+  FastPwm();
+ 2ea:	0e 94 0a 01 	call	0x214	; 0x214 <FastPwm>
+  sei();
+ 2ee:	78 94       	sei
+  TInterrupt();
+ 2f0:	0e 94 66 01 	call	0x2cc	; 0x2cc <TInterrupt>
+  
+  while(1)
+  {
+    Lightdarktobright();
+ 2f4:	0e 94 44 00 	call	0x88	; 0x88 <Lightdarktobright>
+	
+    uint16_t val =  ConversionADC(); 
+ 2f8:	0e 94 25 01 	call	0x24a	; 0x24a <ConversionADC>
+	
+    //potentiometer as 512 half way
+	if (val > 512)
+ 2fc:	81 30       	cpi	r24, 0x01	; 1
+ 2fe:	92 40       	sbci	r25, 0x02	; 2
+ 300:	18 f0       	brcs	.+6      	; 0x308 <main+0x2a>
+    {
+      lightbrighttodark();
+ 302:	0e 94 9e 00 	call	0x13c	; 0x13c <lightbrighttodark>
+ 306:	f6 cf       	rjmp	.-20     	; 0x2f4 <main+0x16>
+    }
+    else
+    {
+      lightbrighttodark();
+ 308:	0e 94 9e 00 	call	0x13c	; 0x13c <lightbrighttodark>
+ 30c:	f3 cf       	rjmp	.-26     	; 0x2f4 <main+0x16>
+
+0000030e <__vector_1>:
+
+  }
+  
+}
+ISR (INT0_vect)
+{
+ 30e:	1f 92       	push	r1
+ 310:	0f 92       	push	r0
+ 312:	0f b6       	in	r0, 0x3f	; 63
+ 314:	0f 92       	push	r0
+ 316:	11 24       	eor	r1, r1
+ 318:	2f 93       	push	r18
+ 31a:	3f 93       	push	r19
+ 31c:	4f 93       	push	r20
+ 31e:	5f 93       	push	r21
+ 320:	6f 93       	push	r22
+ 322:	7f 93       	push	r23
+ 324:	8f 93       	push	r24
+ 326:	9f 93       	push	r25
+ 328:	af 93       	push	r26
+ 32a:	bf 93       	push	r27
+ 32c:	ef 93       	push	r30
+ 32e:	ff 93       	push	r31
+  Blinkleds();
+ 330:	0e 94 33 01 	call	0x266	; 0x266 <Blinkleds>
+ 334:	ff 91       	pop	r31
+ 336:	ef 91       	pop	r30
+ 338:	bf 91       	pop	r27
+ 33a:	af 91       	pop	r26
+ 33c:	9f 91       	pop	r25
+ 33e:	8f 91       	pop	r24
+ 340:	7f 91       	pop	r23
+ 342:	6f 91       	pop	r22
+ 344:	5f 91       	pop	r21
+ 346:	4f 91       	pop	r20
+ 348:	3f 91       	pop	r19
+ 34a:	2f 91       	pop	r18
+ 34c:	0f 90       	pop	r0
+ 34e:	0f be       	out	0x3f, r0	; 63
+ 350:	0f 90       	pop	r0
+ 352:	1f 90       	pop	r1
+ 354:	18 95       	reti
+
+00000356 <_exit>:
+ 356:	f8 94       	cli
+
+00000358 <__stop_program>:
+ 358:	ff cf       	rjmp	.-2      	; 0x358 <__stop_program>
